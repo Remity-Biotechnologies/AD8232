@@ -1,0 +1,677 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD19\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2020-01-28</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">3:59:11 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc" class="file"><acronym title="C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc">C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">111</td></tr>
+</table>
+</td>
+</table><a name="IDTDFX1XRQEUQSLORXL0BEOHCSIIXEZ0MSRM440DOZNM2RS1BNNOIN"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAQJXRTUODFXXGVCYNFRTOPN4ZLWFVO5GJQKUBREUNE5Z4R430PZP">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">16</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDP2430WODPSCUBL5X201OCYGQNHBWOHLEJKARWAB3JX41SNIJNOLE">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNZCICEODON5DCWJLBFBRDWADFG403Y50E4MTOQLAWWUWNWOR0ELP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">22</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDB3T5NOERZY2PDFUNQ2PFLAKYXEXA0TAJLUZJJ5MO3HA5AMJUK2QO">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSJKKXWIBEYJGNADPJKVEHX55FK2S3SKRKH15GNFE0O3E3S5T4HDI">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCLFUE3K5IIYWBN3XEDALUZJSCCKZVU2A234ROUN1QV5PBZ4A1ZP">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1JB0DOYYQTUGLNNQCY1YSLUFXEPMHYMVBLQTAXM4K3OBY1KI2O0I">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDV25YTI0N1YYZKHDXTK24051YGEKMKYJPD5HCEFDCK04343L3XCFG">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4V3KXBHWGQS0OJ21BC1ZVQAIOICRAINGYWWPOXFQISKHFQZRR15D">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">36</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID343BLROIQFGNGEUK31KQBNEQDKT0VRLYXCFIQXPXZYIP2BBEUMEB">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">26</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBRBTNQPQWWBFNM2HCOZ4ZG4BLN0YSYJCLDOZF5GCMEDI03MRNXDG">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">11</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHXJRSMPZXDY0KWU5ZI3V5SZLEFUF5ZLIUL05CFLIKV3PBJJQFPWK">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZFZWRS0L4XDAGIH3GFAKM04EMCLYYBBX2SYGE1J0KNWYQLBLIVHJ">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">111</td>
+</tr>
+</table><br><a name="IDAQJXRTUODFXXGVCYNFRTOPN4ZLWFVO5GJQKUBREUNE5Z4R430PZP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-1(89.15mm,73.2mm) on Top Layer And Pad U1-2(89.15mm,72.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-10(92mm,70.35mm) on Top Layer And Pad U1-9(91.5mm,70.35mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-11(92.85mm,71.2mm) on Top Layer And Pad U1-12(92.85mm,71.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-12(92.85mm,71.7mm) on Top Layer And Pad U1-13(92.85mm,72.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-13(92.85mm,72.2mm) on Top Layer And Pad U1-14(92.85mm,72.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3640.044mil|Location2.X=3651.294mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-14(92.85mm,72.7mm) on Top Layer And Pad U1-15(92.85mm,73.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-16(92mm,74.05mm) on Top Layer And Pad U1-17(91.5mm,74.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-17(91.5mm,74.05mm) on Top Layer And Pad U1-18(91mm,74.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-18(91mm,74.05mm) on Top Layer And Pad U1-19(90.5mm,74.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2899.887mil|Location2.Y=2911.137mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-19(90.5mm,74.05mm) on Top Layer And Pad U1-20(90mm,74.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-2(89.15mm,72.7mm) on Top Layer And Pad U1-3(89.15mm,72.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-3(89.15mm,72.2mm) on Top Layer And Pad U1-4(89.15mm,71.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3494.374mil|Location2.X=3505.624mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-4(89.15mm,71.7mm) on Top Layer And Pad U1-5(89.15mm,71.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-6(90mm,70.35mm) on Top Layer And Pad U1-7(90.5mm,70.35mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-7(90.5mm,70.35mm) on Top Layer And Pad U1-8(91mm,70.35mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True">Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U1-8(91mm,70.35mm) on Top Layer And Pad U1-9(91.5mm,70.35mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDNZCICEODON5DCWJLBFBRDWADFG403Y50E4MTOQLAWWUWNWOR0ELP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.387mil|Location2.X=3621.422mil|Location1.Y=2901.512mil|Location2.Y=3039.434mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.387mil|Location2.X=3621.422mil|Location1.Y=2901.512mil|Location2.Y=3039.434mil|Absolute=True">Un-Routed Net Constraint: Net NetC1_1 Between Pad U1-20(90mm,74.05mm) on Top Layer And Pad C1-1(91.4mm,76.7mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3495.999mil|Location2.X=3558.43mil|Location1.Y=2872.969mil|Location2.Y=3039.434mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3495.999mil|Location2.X=3558.43mil|Location1.Y=2872.969mil|Location2.Y=3039.434mil|Absolute=True">Un-Routed Net Constraint: Net NetC1_2 Between Pad U1-1(89.15mm,73.2mm) on Top Layer And Pad C1-2(89.8mm,76.7mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3161.354mil|Location2.X=3523.684mil|Location1.Y=2813.913mil|Location2.Y=3137.17mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3161.354mil|Location2.X=3523.684mil|Location1.Y=2813.913mil|Location2.Y=3137.17mil|Absolute=True">Un-Routed Net Constraint: Net NetC3_1 Between Pad C3-1(80.8mm,79.1mm) on Bottom Layer And Pad U1-4(89.15mm,71.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3161.354mil|Location2.X=3523.684mil|Location1.Y=2794.229mil|Location2.Y=3074.178mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3161.354mil|Location2.X=3523.684mil|Location1.Y=2794.229mil|Location2.Y=3074.178mil|Absolute=True">Un-Routed Net Constraint: Net NetC3_2 Between Pad C3-2(80.8mm,77.5mm) on Bottom Layer And Pad U1-5(89.15mm,71.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3613.127mil|Location2.X=3782.838mil|Location1.Y=2901.512mil|Location2.Y=3039.434mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3613.127mil|Location2.X=3782.838mil|Location1.Y=2901.512mil|Location2.Y=3039.434mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-16(92mm,74.05mm) on Top Layer And Pad C4-2(95.5mm,76.7mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3659.842mil|Location2.X=3958.268mil|Location1.Y=2919.686mil|Location2.Y=3061.716mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3659.842mil|Location2.X=3958.268mil|Location1.Y=2919.686mil|Location2.Y=3061.716mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C4-2(95.5mm,76.7mm) on Bottom Layer And Track (97.448mm,74.676mm)(98mm,75.228mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3573.757mil|Location2.X=3641.106mil|Location1.Y=2673.166mil|Location2.Y=2783.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3573.757mil|Location2.X=3641.106mil|Location1.Y=2673.166mil|Location2.Y=2783.528mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_1 Between Pad U1-8(91mm,70.35mm) on Top Layer And Pad C6-1(91.9mm,68.4mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3595.114mil|Location2.X=3641.106mil|Location1.Y=2582.614mil|Location2.Y=2783.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3595.114mil|Location2.X=3641.106mil|Location1.Y=2582.614mil|Location2.Y=2783.528mil|Absolute=True">Un-Routed Net Constraint: Net NetC7_2 Between Pad C7-2(91.9mm,66.1mm) on Top Layer And Pad U1-10(92mm,70.35mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3573.757mil|Location2.X=3818.272mil|Location1.Y=2880.764mil|Location2.Y=2929.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3573.757mil|Location2.X=3818.272mil|Location1.Y=2880.764mil|Location2.Y=2929.197mil|Absolute=True">Un-Routed Net Constraint: Net NetC4_1 Between Pad U1-18(91mm,74.05mm) on Top Layer And Pad R10-2(96.4mm,73.673mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3593.441mil|Location2.X=3802.524mil|Location1.Y=2586.552mil|Location2.Y=2783.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3593.441mil|Location2.X=3802.524mil|Location1.Y=2586.552mil|Location2.Y=2783.528mil|Absolute=True">Un-Routed Net Constraint: Net NetR13_1 Between Pad U1-9(91.5mm,70.35mm) on Top Layer And Pad R14-2(96mm,66.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.669mil|Location2.X=3787.464mil|Location1.Y=2823.46mil|Location2.Y=2869.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.669mil|Location2.X=3787.464mil|Location1.Y=2823.46mil|Location2.Y=2869.452mil|Absolute=True">Un-Routed Net Constraint: Net NetR15_1 Between Pad U1-13(92.85mm,72.2mm) on Top Layer And Pad R15-1(95.7mm,72.3mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.669mil|Location2.X=3790.712mil|Location1.Y=2586.552mil|Location2.Y=2831.755mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.669mil|Location2.X=3790.712mil|Location1.Y=2586.552mil|Location2.Y=2831.755mil|Absolute=True">Un-Routed Net Constraint: Net NetR16_2 Between Pad U1-12(92.85mm,71.7mm) on Top Layer And Pad R16-2(95.7mm,66.2mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.669mil|Location2.X=3854.394mil|Location1.Y=2740.784mil|Location2.Y=2812.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.669mil|Location2.X=3854.394mil|Location1.Y=2740.784mil|Location2.Y=2812.071mil|Absolute=True">Un-Routed Net Constraint: Net NetR17_1 Between Pad U1-11(92.85mm,71.2mm) on Top Layer And Pad R17-1(97.4mm,70.2mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.548mil|Location2.X=3552.229mil|Location1.Y=2650.606mil|Location2.Y=2783.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.548mil|Location2.X=3552.229mil|Location1.Y=2650.606mil|Location2.Y=2783.528mil|Absolute=True">Un-Routed Net Constraint: Net 3.3V Between Pad R5-2(80.1mm,67.827mm) on Top Layer And Pad U1-6(90mm,70.35mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.548mil|Location2.X=3523.684mil|Location1.Y=2744.032mil|Location2.Y=2851.441mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.548mil|Location2.X=3523.684mil|Location1.Y=2744.032mil|Location2.Y=2851.441mil|Absolute=True">Un-Routed Net Constraint: Net NetR7_2 Between Pad R7-2(80.1mm,70.2mm) on Top Layer And Pad U1-3(89.15mm,72.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3613.127mil|Location2.X=3669.354mil|Location1.Y=2853.283mil|Location2.Y=2929.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3613.127mil|Location2.X=3669.354mil|Location1.Y=2853.283mil|Location2.Y=2929.197mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-16(92mm,74.05mm) on Top Layer And Pad U1-14(92.85mm,72.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.465mil|Location2.X=3669.354mil|Location1.Y=2789.307mil|Location2.Y=2895.733mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.465mil|Location2.X=3669.354mil|Location1.Y=2789.307mil|Location2.Y=2895.733mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-PAD(91mm,72.2mm) on Top Layer And Pad U1-14(92.85mm,72.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3593.441mil|Location2.X=3669.354mil|Location1.Y=2872.969mil|Location2.Y=2929.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3593.441mil|Location2.X=3669.354mil|Location1.Y=2872.969mil|Location2.Y=2929.197mil|Absolute=True">Un-Routed Net Constraint: Net 3.3V Between Pad U1-17(91.5mm,74.05mm) on Top Layer And Pad U1-15(92.85mm,73.2mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.387mil|Location2.X=3611.283mil|Location1.Y=2755.843mil|Location2.Y=2929.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.387mil|Location2.X=3611.283mil|Location1.Y=2755.843mil|Location2.Y=2929.197mil|Absolute=True">Un-Routed Net Constraint: Net 3.3V Between Pad U1-6(90mm,70.35mm) on Top Layer And Pad U1-17(91.5mm,74.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3279mil|Location2.X=3662.992mil|Location1.Y=2815mil|Location2.Y=3015.354mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3279mil|Location2.X=3662.992mil|Location1.Y=2815mil|Location2.Y=3015.354mil|Absolute=True">Un-Routed Net Constraint: Net NetR6_1 Between Track (83.464mm,76.403mm)(85.827mm,74.041mm) on Top Layer And Pad U1-19(90.5mm,74.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.246mil|Location2.X=3523.684mil|Location1.Y=2774mil|Location2.Y=2871.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.246mil|Location2.X=3523.684mil|Location1.Y=2774mil|Location2.Y=2871.125mil|Absolute=True">Un-Routed Net Constraint: Net NetR3_2 Between Via (83.979mm,71.323mm) from Top Layer to Bottom Layer And Pad U1-2(89.15mm,72.7mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3455.118mil|Location2.X=3662.992mil|Location1.Y=2620mil|Location2.Y=2869.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3455.118mil|Location2.X=3662.992mil|Location1.Y=2620mil|Location2.Y=2869.686mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_2 Between Track (90.3mm,68.4mm)(90.3mm,69.088mm) on Top Layer And Pad U1-7(90.5mm,70.35mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4V3KXBHWGQS0OJ21BC1ZVQAIOICRAINGYWWPOXFQISKHFQZRR15D"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-1(89.15mm,73.2mm) on Top Layer And Pad U1-2(89.15mm,72.7mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2867.344mil|Location2.Y=2878.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2867.344mil|Location2.Y=2878.594mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-1(89.15mm,73.2mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-10(92mm,70.35mm) on Top Layer And Pad U1-9(91.5mm,70.35mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3607.502mil|Location2.X=3618.752mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3607.502mil|Location2.X=3618.752mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-10(92mm,70.35mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-11(92.85mm,71.2mm) on Top Layer And Pad U1-12(92.85mm,71.7mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2788.604mil|Location2.Y=2799.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2788.604mil|Location2.Y=2799.854mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-11(92.85mm,71.2mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-12(92.85mm,71.7mm) on Top Layer And Pad U1-13(92.85mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2808.288mil|Location2.Y=2819.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2808.288mil|Location2.Y=2819.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-12(92.85mm,71.7mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-13(92.85mm,72.2mm) on Top Layer And Pad U1-14(92.85mm,72.7mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2827.974mil|Location2.Y=2839.224mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2827.974mil|Location2.Y=2839.224mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-13(92.85mm,72.2mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.044mil|Location2.X=3647.294mil|Location1.Y=2866.422mil|Location2.Y=2877.672mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-14(92.85mm,72.7mm) on Top Layer And Pad U1-15(92.85mm,73.2mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2847.658mil|Location2.Y=2858.908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2847.658mil|Location2.Y=2858.908mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-14(92.85mm,72.7mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2867.344mil|Location2.Y=2878.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.155mil|Location2.X=3644.405mil|Location1.Y=2867.344mil|Location2.Y=2878.594mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-15(92.85mm,73.2mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.58mil|Location2.X=3617.83mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-16(92mm,74.05mm) on Top Layer And Pad U1-17(91.5mm,74.05mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3607.502mil|Location2.X=3618.752mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3607.502mil|Location2.X=3618.752mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-16(92mm,74.05mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-17(91.5mm,74.05mm) on Top Layer And Pad U1-18(91mm,74.05mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3587.816mil|Location2.X=3599.066mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3587.816mil|Location2.X=3599.066mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-17(91.5mm,74.05mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-18(91mm,74.05mm) on Top Layer And Pad U1-19(90.5mm,74.05mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.132mil|Location2.X=3579.382mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.132mil|Location2.X=3579.382mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-18(91mm,74.05mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2895.887mil|Location2.Y=2907.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-19(90.5mm,74.05mm) on Top Layer And Pad U1-20(90mm,74.05mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3548.446mil|Location2.X=3559.696mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3548.446mil|Location2.X=3559.696mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-19(90.5mm,74.05mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2846.737mil|Location2.Y=2857.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-2(89.15mm,72.7mm) on Top Layer And Pad U1-3(89.15mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2847.658mil|Location2.Y=2858.908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2847.658mil|Location2.Y=2858.908mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-2(89.15mm,72.7mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.762mil|Location2.X=3540.012mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.762mil|Location2.X=3540.012mil|Location1.Y=2892.997mil|Location2.Y=2904.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-20(90mm,74.05mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2827.052mil|Location2.Y=2838.302mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-3(89.15mm,72.2mm) on Top Layer And Pad U1-4(89.15mm,71.7mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2827.974mil|Location2.Y=2839.224mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2827.974mil|Location2.Y=2839.224mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-3(89.15mm,72.2mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3490.374mil|Location2.X=3501.624mil|Location1.Y=2807.367mil|Location2.Y=2818.617mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-4(89.15mm,71.7mm) on Top Layer And Pad U1-5(89.15mm,71.2mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2808.288mil|Location2.Y=2819.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2808.288mil|Location2.Y=2819.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-4(89.15mm,71.7mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2788.604mil|Location2.Y=2799.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3520.95mil|Location2.X=3532.2mil|Location1.Y=2788.604mil|Location2.Y=2799.854mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-5(89.15mm,71.2mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547.525mil|Location2.X=3558.775mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-6(90mm,70.35mm) on Top Layer And Pad U1-7(90.5mm,70.35mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.762mil|Location2.X=3540.012mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.762mil|Location2.X=3540.012mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-6(90mm,70.35mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.21mil|Location2.X=3578.46mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-7(90.5mm,70.35mm) on Top Layer And Pad U1-8(91mm,70.35mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3548.446mil|Location2.X=3559.696mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3548.446mil|Location2.X=3559.696mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-7(90.5mm,70.35mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.895mil|Location2.X=3598.145mil|Location1.Y=2750.218mil|Location2.Y=2761.468mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U1-8(91mm,70.35mm) on Top Layer And Pad U1-9(91.5mm,70.35mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.132mil|Location2.X=3579.382mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.132mil|Location2.X=3579.382mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-8(91mm,70.35mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3587.816mil|Location2.X=3599.066mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3587.816mil|Location2.X=3599.066mil|Location1.Y=2780.793mil|Location2.Y=2792.043mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-9(91.5mm,70.35mm) on Top Layer And Pad U1-PAD(91mm,72.2mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID343BLROIQFGNGEUK31KQBNEQDKT0VRLYXCFIQXPXZYIP2BBEUMEB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4078.327mil|Location2.X=4085.994mil|Location1.Y=2862.593mil|Location2.Y=2870.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4078.327mil|Location2.X=4085.994mil|Location1.Y=2862.593mil|Location2.Y=2870.26mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C2-1(103.4mm,73mm) on Bottom Layer And Text "R18" (103.937mm,72.307mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.676mil|Location2.X=3548.926mil|Location1.Y=2670.553mil|Location2.Y=2681.803mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.676mil|Location2.X=3548.926mil|Location1.Y=2670.553mil|Location2.Y=2681.803mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.05mm &lt; 0.254mm) Between Pad C6-2(90.3mm,68.4mm) on Top Layer And Text "C7" (89.5mm,67.4mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3507.134mil|Location2.X=3518.384mil|Location1.Y=3104.167mil|Location2.Y=3115.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3507.134mil|Location2.X=3518.384mil|Location1.Y=3104.167mil|Location2.Y=3115.417mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.223mm &lt; 0.254mm) Between Pad R4-1(89.2mm,79.5mm) on Bottom Layer And Text "C1" (89.474mm,78.328mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.223mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3427.23mil|Location2.X=3434.896mil|Location1.Y=3114.656mil|Location2.Y=3122.323mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3427.23mil|Location2.X=3434.896mil|Location1.Y=3114.656mil|Location2.Y=3122.323mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad R4-2(87.6mm,79.5mm) on Bottom Layer And Text "R1" (87.149mm,78.71mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2881.186mil|Location2.Y=2892.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2881.186mil|Location2.Y=2892.436mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-1(89.15mm,73.2mm) on Top Layer And Track (88.75mm,69.95mm)(88.75mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3621.344mil|Location2.X=3632.594mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3621.344mil|Location2.X=3632.594mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-10(92mm,70.35mm) on Top Layer And Track (88.75mm,69.95mm)(93.25mm,69.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2792.604mil|Location2.Y=2803.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2792.604mil|Location2.Y=2803.854mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-11(92.85mm,71.2mm) on Top Layer And Track (93.25mm,69.95mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-12(92.85mm,71.7mm) on Top Layer And Track (93.25mm,69.95mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2831.974mil|Location2.Y=2843.224mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2831.974mil|Location2.Y=2843.224mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-13(92.85mm,72.2mm) on Top Layer And Track (93.25mm,69.95mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2851.658mil|Location2.Y=2862.908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2851.658mil|Location2.Y=2862.908mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-14(92.85mm,72.7mm) on Top Layer And Track (93.25mm,69.95mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2871.344mil|Location2.Y=2882.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.682mil|Location2.X=3671.932mil|Location1.Y=2871.344mil|Location2.Y=2882.594mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-15(92.85mm,73.2mm) on Top Layer And Track (93.25mm,69.95mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.502mil|Location2.X=3622.752mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.502mil|Location2.X=3622.752mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-16(92mm,74.05mm) on Top Layer And Track (88.75mm,74.45mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3591.816mil|Location2.X=3603.066mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3591.816mil|Location2.X=3603.066mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-17(91.5mm,74.05mm) on Top Layer And Track (88.75mm,74.45mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3572.132mil|Location2.X=3583.382mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3572.132mil|Location2.X=3583.382mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-18(91mm,74.05mm) on Top Layer And Track (88.75mm,74.45mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3552.446mil|Location2.X=3563.696mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3552.446mil|Location2.X=3563.696mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-19(90.5mm,74.05mm) on Top Layer And Track (88.75mm,74.45mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2861.5mil|Location2.Y=2872.75mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2861.5mil|Location2.Y=2872.75mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-2(89.15mm,72.7mm) on Top Layer And Track (88.75mm,69.95mm)(88.75mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3532.762mil|Location2.X=3544.012mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3532.762mil|Location2.X=3544.012mil|Location1.Y=2920.524mil|Location2.Y=2931.774mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-20(90mm,74.05mm) on Top Layer And Track (88.75mm,74.45mm)(93.25mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2841.816mil|Location2.Y=2853.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2841.816mil|Location2.Y=2853.066mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-3(89.15mm,72.2mm) on Top Layer And Track (88.75mm,69.95mm)(88.75mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2822.13mil|Location2.Y=2833.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2822.13mil|Location2.Y=2833.38mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-4(89.15mm,71.7mm) on Top Layer And Track (88.75mm,69.95mm)(88.75mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2802.446mil|Location2.Y=2813.696mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3493.422mil|Location2.X=3504.672mil|Location1.Y=2802.446mil|Location2.Y=2813.696mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-5(89.15mm,71.2mm) on Top Layer And Track (88.75mm,69.95mm)(88.75mm,74.45mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3538.279mil|Location2.X=3545.945mil|Location1.Y=2769.062mil|Location2.Y=2776.728mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3538.279mil|Location2.X=3545.945mil|Location1.Y=2769.062mil|Location2.Y=2776.728mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-6(90mm,70.35mm) on Top Layer And Text "C6" (89.303mm,70.015mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3542.604mil|Location2.X=3553.854mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3542.604mil|Location2.X=3553.854mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-6(90mm,70.35mm) on Top Layer And Track (88.75mm,69.95mm)(93.25mm,69.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3548.731mil|Location2.X=3559.981mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3548.731mil|Location2.X=3559.981mil|Location1.Y=2754.218mil|Location2.Y=2765.468mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.189mm &lt; 0.254mm) Between Pad U1-7(90.5mm,70.35mm) on Top Layer And Text "C6" (89.303mm,70.015mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.189mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3562.288mil|Location2.X=3573.538mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3562.288mil|Location2.X=3573.538mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-7(90.5mm,70.35mm) on Top Layer And Track (88.75mm,69.95mm)(93.25mm,69.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.974mil|Location2.X=3593.224mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.974mil|Location2.X=3593.224mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-8(91mm,70.35mm) on Top Layer And Track (88.75mm,69.95mm)(93.25mm,69.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3601.658mil|Location2.X=3612.908mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3601.658mil|Location2.X=3612.908mil|Location1.Y=2753.266mil|Location2.Y=2764.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad U1-9(91.5mm,70.35mm) on Top Layer And Track (88.75mm,69.95mm)(93.25mm,69.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDBRBTNQPQWWBFNM2HCOZ4ZG4BLN0YSYJCLDOZF5GCMEDI03MRNXDG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3505.646mil|Location2.X=3513.313mil|Location1.Y=3094.693mil|Location2.Y=3102.36mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3505.646mil|Location2.X=3513.313mil|Location1.Y=3094.693mil|Location2.Y=3102.36mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C1" (89.474mm,78.328mm) on Bottom Overlay And Track (86.622mm,78.611mm)(90.178mm,78.611mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.041mil|Location2.X=3519.707mil|Location1.Y=2754.039mil|Location2.Y=2761.706mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.041mil|Location2.X=3519.707mil|Location1.Y=2754.039mil|Location2.Y=2761.706mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C6" (89.303mm,70.015mm) on Top Overlay And Track (88.75mm,69.95mm)(93.25mm,69.95mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3515.477mil|Location2.X=3526.727mil|Location1.Y=2664.317mil|Location2.Y=2675.567mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3515.477mil|Location2.X=3526.727mil|Location1.Y=2664.317mil|Location2.Y=2675.567mil|Absolute=True">Silk To Silk Clearance Constraint: (0.028mm &lt; 0.254mm) Between Text "C7" (89.5mm,67.4mm) on Top Overlay And Track (89.322mm,67.511mm)(89.322mm,69.289mm) on Top Overlay Silk Text to Silk Clearance [0.028mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3519.789mil|Location2.X=3527.455mil|Location1.Y=2654.081mil|Location2.Y=2661.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3519.789mil|Location2.X=3527.455mil|Location1.Y=2654.081mil|Location2.Y=2661.747mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C7" (89.5mm,67.4mm) on Top Overlay And Track (89.322mm,67.511mm)(92.878mm,67.511mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3406.483mil|Location2.X=3414.149mil|Location1.Y=3094.978mil|Location2.Y=3102.644mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3406.483mil|Location2.X=3414.149mil|Location1.Y=3094.978mil|Location2.Y=3102.644mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1" (87.149mm,78.71mm) on Bottom Overlay And Track (86.622mm,78.611mm)(86.622mm,80.389mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3427.23mil|Location2.X=3434.896mil|Location1.Y=3094.017mil|Location2.Y=3101.684mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3427.23mil|Location2.X=3434.896mil|Location1.Y=3094.017mil|Location2.Y=3101.684mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1" (87.149mm,78.71mm) on Bottom Overlay And Track (86.622mm,78.611mm)(90.178mm,78.611mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3790.879mil|Location2.X=3798.545mil|Location1.Y=2979.778mil|Location2.Y=2987.445mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3790.879mil|Location2.X=3798.545mil|Location1.Y=2979.778mil|Location2.Y=2987.445mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R10" (96.636mm,75.307mm) on Bottom Overlay And Track (92.922mm,75.811mm)(96.478mm,75.811mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.513mil|Location2.X=3802.179mil|Location1.Y=2979.778mil|Location2.Y=2987.445mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.513mil|Location2.X=3802.179mil|Location1.Y=2979.778mil|Location2.Y=2987.445mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R10" (96.636mm,75.307mm) on Bottom Overlay And Track (96.478mm,75.811mm)(96.478mm,77.589mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3841.887mil|Location2.X=3853.137mil|Location1.Y=2851.829mil|Location2.Y=2863.079mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3841.887mil|Location2.X=3853.137mil|Location1.Y=2851.829mil|Location2.Y=2863.079mil|Absolute=True">Silk To Silk Clearance Constraint: (0.209mm &lt; 0.254mm) Between Text "R17" (97.727mm,71.925mm) on Bottom Overlay And Track (95.422mm,72.784mm)(98.978mm,72.784mm) on Bottom Overlay Silk Text to Silk Clearance [0.209mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4086.375mil|Location2.X=4097.625mil|Location1.Y=2838.241mil|Location2.Y=2849.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4086.375mil|Location2.X=4097.625mil|Location1.Y=2838.241mil|Location2.Y=2849.491mil|Absolute=True">Silk To Silk Clearance Constraint: (0.046mm &lt; 0.254mm) Between Text "R18" (103.937mm,72.307mm) on Bottom Overlay And Track (100.822mm,72.111mm)(104.378mm,72.111mm) on Bottom Overlay Silk Text to Silk Clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3254.768mil|Location2.X=3266.018mil|Location1.Y=2651.855mil|Location2.Y=2663.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\rleeu\Documents\Year3_local\Remity-Biotechnologies\ECGHeart\ECGpcb.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3254.768mil|Location2.X=3266.018mil|Location1.Y=2651.855mil|Location2.Y=2663.105mil|Absolute=True">Silk To Silk Clearance Constraint: (0.072mm &lt; 0.254mm) Between Text "R5" (82.9mm,67.5mm) on Top Overlay And Track (82.678mm,66.938mm)(82.678mm,68.716mm) on Top Overlay Silk Text to Silk Clearance [0.072mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

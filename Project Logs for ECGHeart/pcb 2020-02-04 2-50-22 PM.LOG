@@ -1,0 +1,4 @@
+Added Component: Designator=R5(RESISTOR 10M)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetR5_1 Pin=R5-1
+Added Pin To Net: NetName=3.3V Pin=R5-2

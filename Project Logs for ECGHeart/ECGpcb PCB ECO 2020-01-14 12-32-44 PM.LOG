@@ -1,0 +1,56 @@
+Added Component: Designator=U1(*LFCSP_20_AD8232(Primary))
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Availability"; Value = "Unavailable"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Analog Devices"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "AD8232"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "LFCSP-20 Analog Devices"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/AD8232/Analog%20Devices/view-part/4218063/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=3.3V Pin=U1-6
+Added Pin To Net: NetName=3.3V Pin=U1-15
+Added Pin To Net: NetName=3.3V Pin=U1-17
+Added Net: Name=3.3V
+Added Pin To Net: NetName=GND Pin=U1-14
+Added Pin To Net: NetName=GND Pin=U1-16
+Added Pin To Net: NetName=GND Pin=U1-PAD
+Added Net: Name=GND
+Added Pin To Net: NetName=NetC1_4 Pin=U1-20
+Added Net: Name=NetC1_4
+Added Pin To Net: NetName=NetC1_5 Pin=U1-1
+Added Net: Name=NetC1_5
+Added Net: Name=NetC2_4
+Added Pin To Net: NetName=NetC3_4 Pin=U1-4
+Added Net: Name=NetC3_4
+Added Pin To Net: NetName=NetC3_5 Pin=U1-5
+Added Net: Name=NetC3_5
+Added Pin To Net: NetName=NetC4_4 Pin=U1-18
+Added Net: Name=NetC4_4
+Added Pin To Net: NetName=NetC6_4 Pin=U1-8
+Added Net: Name=NetC6_4
+Added Pin To Net: NetName=NetC6_5 Pin=U1-7
+Added Net: Name=NetC6_5
+Added Net: Name=NetC7_4
+Added Pin To Net: NetName=NetC7_5 Pin=U1-10
+Added Net: Name=NetC7_5
+Added Net: Name=NetC8_4
+Added Net: Name=NetC9_4
+Added Net: Name=NetR1_1
+Added Net: Name=NetR2_1
+Added Pin To Net: NetName=NetR3_2 Pin=U1-2
+Added Net: Name=NetR3_2
+Added Net: Name=NetR5_1
+Added Pin To Net: NetName=NetR6_1 Pin=U1-19
+Added Net: Name=NetR6_1
+Added Pin To Net: NetName=NetR7_2 Pin=U1-3
+Added Net: Name=NetR7_2
+Added Net: Name=NetR8_1
+Added Pin To Net: NetName=NetR13_1 Pin=U1-9
+Added Net: Name=NetR13_1
+Added Pin To Net: NetName=NetU1_11 Pin=U1-11
+Added Net: Name=NetU1_11
+Added Pin To Net: NetName=NetU1_12 Pin=U1-12
+Added Net: Name=NetU1_12
+Added Pin To Net: NetName=NetU1_13 Pin=U1-13
+Added Net: Name=NetU1_13
+Added Net: Name=VCC
